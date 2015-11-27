@@ -7,13 +7,7 @@ var http = require('http'),
 
 server.listen(8090);
 
-
-require('./utils/reader');
-
-require('./utils/writer');
-
 require('./utils/worm');
-
 require('./utils/table');
 
 
@@ -21,35 +15,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var messages = ["bites the dust", "killed himself", "fallowed bin laden", ",die die!", "didn't have 9 lives", " see you in hell", "jabber wobber", " has been undefined", "sleeps with the fish", " equals null"];
 
-var timeout = 500;
-
-var worms = {};
-
-var clients = [];
-
-var wormsNumber = 0;
-
-var table1 = new table();
-
-var newWorm ;
+var timeout = 500,
+    worms = {},
+    clients = [],
+    wormsNumber = 0,
+    table1 = new table();
 
 var tableToSend = JSON.stringify({
     "action" : "map" ,
     "values" : table1.getSpace()
 });
 
-
-
 var socket = io.listen(server);
 
 setInterval(function(){
     var positions = [];
 
-
     var wormsToKill = [];
 
-    var tmpFields = [];
-    tmpFields = worms;
+    var tmpFields = worms;
+
+    var wormX;
 
     for(wormX in worms) {
 
@@ -61,7 +47,11 @@ setInterval(function(){
 
         pieces = worms[wormX].getPieces();
 
-
+        /**
+         *
+         * check if worm head has hit a wall
+         *
+         */
         if(table1.checkLimit(pieces[0][0],pieces[0][1])){
 
             wormsToKill.push(wormX);
@@ -76,14 +66,9 @@ setInterval(function(){
 
         for(tmpEach in tmpFields){
             if(tmpEach != wormX) {
-                intersetWorms(tmpEach, wormX);
+                intersectWorms(tmpEach, wormX);
             }
         }
-    /**
-         *
-         * check if worm head has hit a wall
-         *
-         */
     }
 
     for(var i = 0; i <  wormsToKill.length; i++){
@@ -98,7 +83,7 @@ setInterval(function(){
 
 }, timeout);
 
-function intersetWorms(worm1,worm2){
+function intersectWorms(worm1, worm2){
 
     if(worms[worm1] == undefined || worms[worm2] == undefined) {
         return;
@@ -125,7 +110,7 @@ function intersetWorms(worm1,worm2){
             }
 
             if(worms[worm1] != undefined) {
-                toAdd = worms[worm1].remove(i);
+                var toAdd = worms[worm1].remove(i);
             }
 
             worms[worm2].addPieces(toAdd);
@@ -137,10 +122,6 @@ function intersetWorms(worm1,worm2){
         }
     }
 }
-/**
- *
- *
- */
 
 function syncronizedAction(action, id)
 {
@@ -215,9 +196,7 @@ socket.on('connection', function(client){
 
     client.wormId = wormsNumber;
 
-    newWorm = new worm(wormsNumber);
-
-    worms[wormsNumber]= newWorm;
+    worms[wormsNumber]= new worm(wormsNumber);
 
     /**
      * sending welcome message

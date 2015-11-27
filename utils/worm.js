@@ -11,8 +11,6 @@ worm = function (id){
 
     this.moving = [this.wormSpeed,0];
 
-    this.hasBonus = 0;
-   
     this.lengthSnake = 7;
 
     this.minimLength = 3;
@@ -25,8 +23,6 @@ worm = function (id){
 
     this.waitingPieces = this.lengthSnake - this.pieces.length;
 
-    this.inHold = 0;
-    
     this.color = function(){
         color = Math.round(Math.random() * parseInt('ffffff', 16))
         .toString(16);
@@ -48,7 +44,7 @@ worm = function (id){
 
         this.pieces = [[this.head[0] = this.head[0] + this.moving[0], this.head[1] = this.head[1] + this.moving[1]] ].concat(this.pieces);
         
-    }
+    };
 
     this.changeDestination = function(way){
       
@@ -68,31 +64,25 @@ worm = function (id){
                 break;
 
         }
-    }
+    };
     this.getPieces = function (){
         return this.pieces;
-    }
-    /**
-     * 
-     */
-    
-    this.setWormSpeed = function (val){
-        this.wormSpeed = val;
-    }
-    /**
-     * 
-     */
+    };
+
     this.getId = function () {
         return this.id;
-    }
+    };
+
     this.getColor = function(){
         return this.color;
-    }
+    };
+
     this.addPieces = function(elems){
         this.waitingPieces +=elems;
 
         return this;
-    }
+    };
+
     this.reset = function (){
 
         this.moving = [1,0];
@@ -106,7 +96,7 @@ worm = function (id){
         this.head = [1,1];
 
         this.waitingPieces = this.lengthSnake - this.pieces.length;
-    }
+    };
 
     this.remove = function (to){
 
@@ -118,30 +108,21 @@ worm = function (id){
             return this.pieces.length + remained;
         }
         return remained;
-    }
+    };
 
     this.toSmall = function(){
         if(this.pieces.length < this.minimLength) {
             return true;
         }
         return false;
-    }
+    };
 
     this.setName = function(name){
         this.name = name;
-    }
+    };
 
     this.getName = function(){
         
         return this.name;
-    }
-    
-    this.addBonus = function(lastTime) {
-        this.hasBonus = 1;
-        this.remainingBonus = lastTime;
-    }
-    
-    this.getSpeed = function (){
-        return this.wormSpeed;
-    }
-}
+    };
+};

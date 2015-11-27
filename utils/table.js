@@ -9,7 +9,7 @@ table = function() {
         var returned = [];
         
         for(var j = 0; j < x; j++){
-            var tmp = []
+            var tmp = [];
             
             for(var i = 0; i < y; i++) {
 
@@ -29,9 +29,9 @@ table = function() {
             return true;
         }
         return false;
-    }
+    };
     
     this.getSpace = function (){
         return this.space;
-    }
-}
+    };
+};
