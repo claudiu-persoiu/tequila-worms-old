@@ -1,19 +1,7 @@
-$(document).ready(function () {
-    /*
-     var MyWorm = {
-     id: null,
-     alive: 1, //0=dead,1=alive
-     colour: null,
-     setWormId: function(id) {
-     this.wormId = id;
-     },
-     sendWormStatus: function(socket, data) { //use socket
-     socket.send();
-     },
-     allWorms: null
+var streamConnect;
 
-     };
-     */
+$(document).ready(function () {
+
     var socket;
     streamConnect = function () {
 
@@ -85,15 +73,12 @@ $(document).ready(function () {
                 processRespons(response);
             }
 
-
         });
-
 
         socket.on('disconnect', function () {
             console.log('disconected');
             Game.addMessage('You have been disconnected from the server');
         });
-
 
         $(function () {
             $("#send2").click(function () {

@@ -42,7 +42,12 @@ worm = function (id){
             this.remainingBonus--;
         }
 
-        this.pieces = [[this.head[0] = this.head[0] + this.moving[0], this.head[1] = this.head[1] + this.moving[1]] ].concat(this.pieces);
+        this.pieces = [
+            [
+                this.head[0] = this.head[0] + this.moving[0],
+                this.head[1] = this.head[1] + this.moving[1]
+            ]
+        ].concat(this.pieces);
         
     };
 
@@ -87,7 +92,7 @@ worm = function (id){
 
         this.moving = [1,0];
 
-        this.lengthSnake = 5;
+        this.lengthSnake = 7;
 
         this.minimLength = 3;
 

@@ -35,7 +35,7 @@ setInterval(function(){
 
     var tmpFields = worms;
 
-    var wormX;
+    var wormX, wormY, tmpEach;
 
     for(wormX in worms) {
 

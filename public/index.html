@@ -149,10 +149,6 @@
 
             var draw = function () {
                 var i, j, pos, el, index, color;
-                //                        $('#canvas td').each(function () {
-                //                            $(this).css('background', '#ccc');
-                //                        });
-                //
 
                 canvasCtx.fillStyle = '#CCCCCC';
                 canvasCtx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -161,14 +157,12 @@
                     canvasCtx.fillRect(i * elementWidth, 0, elementWidth, elementHeight);
 
                     canvasCtx.fillRect(i * elementWidth, (maxY + 1) * elementHeight, elementWidth, elementHeight);
-
                 }
 
                 for (i = 0; i < (maxY + 2); i++) {
                     canvasCtx.fillRect(0, i * elementHeight, elementWidth, elementHeight);
 
                     canvasCtx.fillRect((maxX + 1) * elementWidth, i * elementHeight, elementWidth, elementHeight);
-
                 }
 
                 for (i = 0; i < maxX; i++) {
@@ -198,8 +192,7 @@
                         } else {
                             color = worms[el.id].color;
                         }
-                        //console.log(worms[el.id]);
-                        //console.log(el.pieces);
+
                         for (i = 0; i < el.pieces.length; i++) {
                             if (i == 0) {
                                 canvasCtx.fillStyle = '#ffffff';
@@ -207,11 +200,12 @@
                                 canvasCtx.fillStyle = color;
                             }
                             pos = el.pieces[i];
-                            //$('#'+pos[0]+'-'+pos[1]).css('background', color)
-                            //if(pos[0] > 1 || pos[1] > 1) {
-                            //canvasCtx.fillStyle = color;
-                            canvasCtx.fillRect(pos[0] * elementWidth + elementWidth, pos[1] * elementHeight + elementHeight, elementWidth, elementHeight);
-                            //}
+
+                            canvasCtx.fillRect(
+                                    pos[0] * elementWidth + elementWidth,
+                                    pos[1] * elementHeight + elementHeight,
+                                    elementWidth,
+                                    elementHeight);
                         }
                     }
                 }
